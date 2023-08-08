@@ -1,19 +1,11 @@
-Food: Foodless, Vegan, Vegetarian, Carnivore, Kosher/Halal(difficult)
-Pacifist (no death blows), never attack in melee, never shoot something with a ranged weapon, no hitting neutrals/friendlies(?)
-* No companions; no pros/beguile, no love injectors, no bodysnatching
-* No water ritual
-* Polygel, cloning draught, never interacted with yourself (cryobarrios, clonelings, fugue)
-* No tools, no recoilers, no teleports
+Food: Vegan, Vegetarian, Carnivore, Kosher/Halal(difficult)
+Polygel, cloning draught
+No tools
 Illiterate: data disks, examinations, books
-* Mapless - no map travel
 Implant-less, mutation-less (physical and mental)
-* No environ damage or digging
 No skill buy
 Chefless - no ingredients or recipes
-* Tonicless (hoarshrooms exempt)
 Nudist
-Devout - pray at all discovered statues, or don't defile any
 Mechanimist - no chrome!
-Atheist - no prays, no Mechanimists hole, no sultan artifacts(?)
 
 Jokes (nethack carryover): polymorphs, wishes(nanocrayons), genocides, prayer

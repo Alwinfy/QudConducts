@@ -10,37 +10,70 @@
   </conduct>
   -->
   <conduct Name="Pariah" Group="Social" Description="You {#have |#}never performed the water ritual.">
-    <injunction Name="EventFired" Target="WaterRitualStart" />
+    <injunction Name="EventFired" Event="WaterRitualStart" />
   </conduct>
   <conduct Name="Loner" Group="Social" Description="You {#have been|were#} companionless.">
-    <injunction Name="EventFired" Target="GainedNewFollower" />
+    <injunction Name="EventFired" Event="GainedNewFollower" />
   </conduct>
   <conduct Name="Charmless" Group="Social" Description="You {#have #}never charmed someone else.">
-    <injunction Name="EventFired" Target="GetCompanionLimit" />
+    <injunction Name="EventFired" Event="GetCompanionLimit" />
   </conduct>
+
   <conduct Name="Tethered" Group="Body" Description="You {#have #}stayed in your own body.">
-    <injunction Name="EventFired" Target="AfterPlayerBodyChange" />
+    <injunction Name="Tethered" />
   </conduct>
   <conduct Name="Cloneless" Group="Body" Description="You {#have never been|were never#} cloned.">
-    <injunction Name="EventFired" Target="AfterBeingCloned" />
+    <injunction Name="EventFired" Event="AfterBeingCloned" />
   </conduct>
+
   <conduct Name="Fasting" Group="Comestibles" Description="You {#are fasting|fasted during your journey#}.">
-    <injunction Name="EventFired" Tag="Eating" />
+    <injunction Name="EventFired" Event="Eating" />
+    <injunction Name="NoUseCampfire" />
+  </conduct>
+  <conduct Name="Cookless" Group="Comestibles" HideIf="Fasting" Description="You {#have never eaten|never ate#} a full meal.">
+    <injunction Name="NoUseCampfire" />
   </conduct>
   <conduct Name="Tonicless" Group="Comestibles" Description="You {#have #} never applied a tonic.">
-    <injunction Name="EventFired" Target="ApplyingTonic" />
+    <injunction Name="EventFired" Event="ApplyingTonic" />
   </conduct>
-  <conduct Name="Food" Group="Comestibles" Description="You {#have #} never applied a tonic.">
-    <injunction Name="EventFired" Target="ApplyingTonic" />
-  </conduct>
+
   <conduct Name="Digless" Group="Movement" Description="You {#have #}never broke walls.">
     <injunction Name="NoKill" Tag="Wall" />
   </conduct>
   <conduct Name="Teleportless" Group="Movement" Description="You {#have #}never teleported.">
-    <injunction Name="EventFired" Target="InitiateRealityDistortionTransit" />
+    <injunction Name="EventFired" Event="InitiateRealityDistortionTransit" />
   </conduct>
-  <conduct Name="Food" Group="Movement" Description="You {#have #} never traveled along the world map.">
+  <conduct Name="Recoilless" Group="Movement" HideIf="Teleportless" Description="You {#have #}never used a recoiler.">
+    <injunction Name="NoUseEnergy" Type="Item Recoiler" />
+  </conduct>
+  <conduct Name="Mapless" Group="Movement" Description="You {#have #} never traveled along the world map.">
     <injunction Name="NoMapTravel" />
+  </conduct>
+
+  <conduct Name="Pax" Group="Violence" Description="You {#are|were#} no killer.">
+    <injunction Name="NoKill" Tag="Creature" />
+  </conduct>
+  <conduct Name="PaxExceptFash" Group="Violence" HideIf="Pax" Description="You {#have #}killed only fascists.">
+    <injunction Name="NoKill" Tag="NotTemplar" />
+  </conduct>
+  <conduct Name="PaxExceptHunters" Group="Violence" HideIf="Pax,PaxExceptFash" Description="You {#have #}killed only those that wished your kind harm.">
+    <injunction Name="NoKill" Tag="NotHunter" ExcludeTag="PsychicHunter" />
+  </conduct>
+  <conduct Name="NoHitFriendlies" Group="Violence" Description="You {#have #}never attacked a friendly being.">
+    <injunction Name="Pacifism" NeutralsAcceptable="false" />
+  </conduct>
+  <conduct Name="NoHitNeutrals" Group="Violence" HideIf="NoHitFriendlies" Description="You {#have #}never attacked first.">
+    <injunction Name="Pacifism" NeutralsAcceptable="true" />
+  </conduct>
+
+  <conduct Name="Hitless" Group="Violence" Description="You {#have not|never#} struck anything.">
+    <injunction Name="EventFired" Event="AttackerAfterMelee" />
+  </conduct>
+  <conduct Name="HitOnlyFist" Group="Violence" HideIf="Hitless" Description="You {#have #}never struck with a weapon.">
+    <injunction Name="FistsOnly" />
+  </conduct>
+  <conduct Name="Gunless" Group="Violence" Description="You {#have #}never used a firearm.">
+    <injunction Name="EventFired" Event="BeginMissileAttack" />
   </conduct>
   <!-- This is shelved until I can figure out enforcement mechanisms. -->
   <!--

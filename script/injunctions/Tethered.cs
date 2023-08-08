@@ -6,18 +6,15 @@ using XRL;
 namespace Alwinfy.Conducts.Injunctions {
 
     [Serializable]
-    public class NoKill : Injunction
+    public class Tethered : Injunction
     {
-        public string Tag;
-        public string ExcludeTag;
-
         public override IEnumerable<EventType> DesiredEvents() {
-            yield return new MinEventType(AwardXPEvent.ID);
+            yield return new MinEventType(AfterPlayerBodyChangeEvent.ID);
         }
 
         public override void HandleEvent(GameObject target, MinEvent E) {
-            if (E is AwardXPEvent axe) {
-                if (axe.Kill != null && axe.Kill.HasTagOrProperty(Tag) && (ExcludeTag == null || !axe.Kill.HasTagOrProperty(ExcludeTag))) {
+            if (E is AfterPlayerBodyChangeEvent ape) {
+                if (ape.OldBody != null && ape.OldBody != ape.NewBody) {
                     SignalViolation();
                 }
             }

@@ -5,8 +5,9 @@ using XRL;
 
 namespace Alwinfy.Conducts.Injunctions {
 
+    // Currently broken (2023-08-08) until next Friday.
     [Serializable]
-    public class NoUse : Injunction
+    public class NoInteract : Injunction
     {
         public string Tag;
 
@@ -30,7 +31,7 @@ namespace Alwinfy.Conducts.Injunctions {
         public override void HandleEvent(GameObject target, MinEvent E) {
             if (E is AfterInventoryActionEvent aiae) {
                 UnityEngine.Debug.Log("[Conducts] Got command: " + aiae.Command);
-                if (aiae.Item.HasTag(Tag) && !ValidCommandsMap.Contains(aiae.Command)) {
+                if (aiae.Item.HasTagOrProperty(Tag) && !ValidCommandsMap.Contains(aiae.Command)) {
                     SignalViolation();
                 }
             }

@@ -33,10 +33,12 @@ namespace XRL.World.Parts {
         }
 
         public override bool HandleEvent(AfterPlayerBodyChangeEvent E) {
-            if (E.OldBody != null) {
-                E.OldBody.RemovePart<alwinfy_ConductListener>();
+            if (E.OldBody != E.NewBody) {
+                if (E.OldBody != null) {
+                    E.OldBody.RemovePart<alwinfy_ConductListener>();
+                }
+                E.NewBody.RequirePart<alwinfy_ConductListener>();
             }
-            E.NewBody.RequirePart<alwinfy_ConductListener>();
             return base.HandleEvent(E);
         }
 

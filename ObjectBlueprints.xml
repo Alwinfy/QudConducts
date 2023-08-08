@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<objects>
+  <object Name="Creature" Load="Merge">
+    <tag Name="NotTemplar" Value="1" />
+    <tag Name="NotHunter" Value="1" />
+  </object>
+  
+  <object Name="PsychicSeekerHunter" Load="Merge">
+    <tag Name="NotHunter" Value="*delete" />
+  </object>
+  <object Name="Templar" Load="Merge">
+    <tag Name="NotHunter" Value="*delete" />
+    <tag Name="NotTemplar" Value="*delete" />
+  </object>
+</objects>
