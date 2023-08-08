@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<conducts>
+  <conduct Name="Artifactless" AppliesToFollowers="true" Description="You have never used an artifact.">
+    <injunction Name="NoUse" Tag="Artifact" />
+  </conduct>
+  <conduct Name="Mechanimist" Superset="Artifactless" Description="You have never used a complex artifact.">
+    <injunction Name="NoUse" Tag="ComplexArtifact" />
+  </conduct>
+</conducts>

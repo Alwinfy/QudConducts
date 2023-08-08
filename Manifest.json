@@ -1,0 +1,10 @@
+{
+	"id": "Conducts",
+	"loadorder": 1,
+	"title": "Conducts",
+	"description": "Adds \"conducts,\" optional challenges to spice up your run with",
+	"tags": "Challenge,Difficulty,Hardcore",
+	"version": "0.1",
+	"author": "Alwinfy",
+	"previewImage": "icon.png"
+}
