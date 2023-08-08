@@ -85,6 +85,8 @@ namespace Alwinfy.Conducts {
                 return null;
             }
             conduct.Description = Reader.GetAttribute("Description");
+            conduct.Group = Reader.GetAttribute("Group");
+            conduct.HideIf = (Reader.GetAttribute("HideIf") ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries);
             if (Reader.GetAttribute("AppliesToFollowers") is string s) {
                 conduct.AppliesToFollowers = s.Equals("true");
             }

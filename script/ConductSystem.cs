@@ -13,12 +13,15 @@ namespace Alwinfy.Conducts {
     [Serializable]
     public class ConductSystem : IGameSystem
     {
-        public HashSet<string> BrokenConducts;
+        public HashSet<string> BrokenConducts = new HashSet<string>();
 
+        [NonSerialized]
+        public Dictionary<string, Conduct> ConductsByName;
         [NonSerialized]
         public Dictionary<ConductType, Dictionary<EventType, List<Conduct>>> ConductsByEventAndType;
         [NonSerialized]
         public HashSet<string> InterestingStringEvents;
+        [NonSerialized]
         public List<int> InterestingMinEvents;
         
         private bool Dirty = true;
@@ -42,13 +45,16 @@ namespace Alwinfy.Conducts {
                 return;
             }
             ConductsByEventAndType = new Dictionary<ConductType, Dictionary<EventType, List<Conduct>>>();
+            ConductsByName = new Dictionary<string, Conduct>();
+            var minEvents = new HashSet<int>();
+            InterestingStringEvents = new HashSet<string>();
             foreach (var conduct in ConductLoader.Conducts) {
                 if (BrokenConducts.Contains(conduct.Name)) {
                     continue;
                 }
+                ConductsByName.Add(conduct.Name, conduct);
                 var type = conduct.AppliesToFollowers ? ConductType.FOLLOWERS : ConductType.SELF;
                 var eventDict = GetOrCreate(ConductsByEventAndType, type);
-                var minEvents = new HashSet<int>();
                 foreach (var evt in conduct.DesiredEvents()) {
                     GetOrCreate(eventDict, evt).Add(conduct);
                     if (evt is StringlyEventType strEv) {
@@ -57,15 +63,26 @@ namespace Alwinfy.Conducts {
                         minEvents.Add(minEv.ID);
                     }
                 }
-                InterestingMinEvents = new List<int>(minEvents);
             }
+            InterestingMinEvents = new List<int>(minEvents);
             Dirty = false;
+        }
+
+        public List<Conduct> FindListeners(ConductType ct, EventType et) {
+            RebuildCaches();
+            Dictionary<EventType, List<Conduct>> conductSet;
+            ConductsByEventAndType.TryGetValue(ct, out conductSet);
+            if (conductSet is null) return null;
+
+            List<Conduct> listeners;
+            conductSet.TryGetValue(et, out listeners);
+            return listeners;
         }
 
         public void NotifyEvent(GameObject target, Event E) {
             foreach (var conductType in ConductTypes(target)) {
-                var listeners = ConductsByEventAndType[conductType][new StringlyEventType(E.ID)];
-                if (listeners != null) {
+                var listeners = FindListeners(conductType, new StringlyEventType(E.ID));
+                if (!listeners.IsNullOrEmpty()) {
                     foreach (var listener in listeners) {
                         listener.NotifyEvent(target, E);
                     }
@@ -76,8 +93,8 @@ namespace Alwinfy.Conducts {
 
         public void NotifyEvent(GameObject target, MinEvent E) {
             foreach (var conductType in ConductTypes(target)) {
-                var listeners = ConductsByEventAndType[conductType][new MinEventType(E.ID)];
-                if (listeners != null) {
+                var listeners = FindListeners(conductType, new MinEventType(E.ID));
+                if (!listeners.IsNullOrEmpty()) {
                     foreach (var listener in listeners) {
                         listener.NotifyEvent(target, E);
                     }

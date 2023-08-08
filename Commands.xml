@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<commands>
+  <command ID="alwinfy_CmdShowConduct" DisplayText="Show conducts" Category="Status"></command>
+</commands>

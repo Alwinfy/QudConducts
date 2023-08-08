@@ -1,9 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <conducts>
+  <!-- skip over artifactless for now, as NoUse is broken until the AfterInventoryUseEvent issue gets patched -->
+  <!--
   <conduct Name="Artifactless" AppliesToFollowers="true" Description="You have never used an artifact.">
     <injunction Name="NoUse" Tag="Artifact" />
   </conduct>
-  <conduct Name="Mechanimist" Superset="Artifactless" Description="You have never used a complex artifact.">
+  <conduct Name="Mechanimist" HideIf="Artifactless" Description="You have never used a complex artifact.">
     <injunction Name="NoUse" Tag="ComplexArtifact" />
   </conduct>
+  -->
+  <conduct Name="Pariah" Group="Social" Description="You {#have |#}never performed the water ritual.">
+    <injunction Name="EventFired" Target="WaterRitualStart" />
+  </conduct>
+  <conduct Name="Loner" Group="Social" Description="You {#have been|were#} companionless.">
+    <injunction Name="EventFired" Target="GainedNewFollower" />
+  </conduct>
+  <conduct Name="Charmless" Group="Social" Description="You {#have #}never charmed someone else.">
+    <injunction Name="EventFired" Target="GetCompanionLimit" />
+  </conduct>
+  <conduct Name="Tethered" Group="Body" Description="You {#have #}stayed in your own body.">
+    <injunction Name="EventFired" Target="AfterPlayerBodyChange" />
+  </conduct>
+  <conduct Name="Cloneless" Group="Body" Description="You {#have never been|were never#} cloned.">
+    <injunction Name="EventFired" Target="AfterBeingCloned" />
+  </conduct>
+  <conduct Name="Fasting" Group="Comestibles" Description="You {#are fasting|fasted during your journey#}.">
+    <injunction Name="EventFired" Tag="Eating" />
+  </conduct>
+  <conduct Name="Tonicless" Group="Comestibles" Description="You {#have #} never applied a tonic.">
+    <injunction Name="EventFired" Target="ApplyingTonic" />
+  </conduct>
+  <conduct Name="Food" Group="Comestibles" Description="You {#have #} never applied a tonic.">
+    <injunction Name="EventFired" Target="ApplyingTonic" />
+  </conduct>
+  <conduct Name="Digless" Group="Movement" Description="You {#have #}never broke walls.">
+    <injunction Name="NoKill" Tag="Wall" />
+  </conduct>
+  <conduct Name="Teleportless" Group="Movement" Description="You {#have #}never teleported.">
+    <injunction Name="EventFired" Target="InitiateRealityDistortionTransit" />
+  </conduct>
+  <conduct Name="Food" Group="Movement" Description="You {#have #} never traveled along the world map.">
+    <injunction Name="NoMapTravel" />
+  </conduct>
+  <!-- This is shelved until I can figure out enforcement mechanisms. -->
+  <!--
+  <conduct Name="Nudist" Group="Body" Description="You {#are|were#} nudist.">
+    <injunction Name="Nudist" />
+  </conduct>
+  -->
 </conducts>

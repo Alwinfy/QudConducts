@@ -10,8 +10,13 @@ namespace Alwinfy.Conducts {
     {
         public string Name;
         public string Description;
+        // Hide this conduct from display if any of these other conducts are satisfied.
+        public string[] HideIf;
+
+        public string Group;
 
         public bool AppliesToFollowers = false;
+        public bool Enforced = false;
 
         public List<Injunction> Injunctions = new List<Injunction>();
 
