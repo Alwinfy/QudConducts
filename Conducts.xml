@@ -24,10 +24,10 @@
   <conduct Name="Illiterate" Group="Literacy" Description="You {#have been|were#} illiterate.">
     <injunction Name="NoInventoryUse" Action="Read,LearnFromDataDisk" />
   </conduct>
-  -->
   <conduct Name="Unexamined" Group="Literacy" Description="You {#have #}never examined any artifacts.">
     <injunction Name="NoUseEnergy" Type="Examine" />
   </conduct>
+  -->
 
   <conduct Name="Tethered" Group="Body" Description="You {#have #}stayed in your own body.">
     <injunction Name="Tethered" />
@@ -81,7 +81,7 @@
     <injunction Name="NoMapTravel" />
   </conduct>
 
-  <conduct Name="Pax" Group="Violence" Description="You {#are|were#} no killer.">
+  <conduct Name="Pax" Group="Violence" Description="You {#are no|were not a#} killer.">
     <injunction Name="NoKill" Tag="Creature" />
   </conduct>
   <conduct Name="PaxExceptFash" Group="Violence" HideIf="Pax" Description="You {#have #}killed only fascists.">
@@ -101,11 +101,12 @@
     <injunction Name="EventFired" Event="AttackerAfterMelee" />
   </conduct>
   <conduct Name="HitOnlyFist" Group="Violence" HideIf="Hitless" Description="You {#have #}never struck with a weapon.">
-    <injunction Name="FistsOnly" />
+    <injunction Name="RestrictWeapon" Tag="NaturalGear" />
   </conduct>
   <conduct Name="Gunless" Group="Violence" Description="You {#have #}never used a firearm.">
     <injunction Name="EventFired" Event="BeginMissileAttack" />
   </conduct>
+
   <!-- This is shelved until I can figure out enforcement mechanisms. -->
   <!--
   <conduct Name="Nudist" Group="Body" Description="You {#are|were#} nudist.">

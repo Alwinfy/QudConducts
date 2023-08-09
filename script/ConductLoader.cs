@@ -132,7 +132,7 @@ namespace Alwinfy.Conducts {
                 paramSet.Add(Reader.Name, Reader.Value);
             } while (Reader.MoveToNextAttribute());
             if (blueprint.Reflector is null) {
-                UnityEngine.Debug.Log("Unable to load class: " + ns + '.' + className);
+                throw new Exception("[Conducts] Error - Unable to load class: " + ns + '.' + className);
             }
             blueprint.Parameters = paramSet;
             Reader.MoveToElement();

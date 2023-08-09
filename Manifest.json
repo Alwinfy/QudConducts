@@ -1,10 +1,10 @@
 {
 	"id": "Conducts",
 	"loadorder": 1,
-	"title": "Conducts",
+	"title": "Caves of Conduct",
 	"description": "Adds \"conducts,\" optional challenges to spice up your run with",
 	"tags": "Challenge,Difficulty,Hardcore",
-	"version": "0.1",
+	"version": "0.2",
 	"author": "Alwinfy",
 	"previewImage": "icon.png"
 }

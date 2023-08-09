@@ -17,7 +17,7 @@ namespace Alwinfy.Conducts.Injunctions {
 
         public override void HandleEvent(GameObject target, MinEvent E) {
             if (E is AttackerDealtDamageEvent adde) {
-                if (adde.Actor == target && adde.Object.pBrain is Brain brain && !HarmAcceptable(brain.GetOpinion(target))) {
+                if (adde.Actor == target && adde.Actor != adde.Object && adde.Object.pBrain is Brain brain && !HarmAcceptable(brain.GetOpinion(target))) {
                     SignalViolation();
                 }
             }

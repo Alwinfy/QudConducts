@@ -6,8 +6,9 @@ using XRL.World.Parts;
 namespace Alwinfy.Conducts.Injunctions {
 
     [Serializable]
-    public class FistsOnly : Injunction
+    public class RestrictWeapon : Injunction
     {
+        public string Tag;
 
         public override IEnumerable<EventType> DesiredEvents() {
             yield return new StringlyEventType("AttackerAfterMelee");
@@ -16,7 +17,7 @@ namespace Alwinfy.Conducts.Injunctions {
         public override void FireEvent(GameObject target, Event E) {
             if (E.ID == "AttackerAfterMelee") {
                 foreach (var weapon in E.GetParameter<List<GameObject>>("Weapons")) {
-                    if (!weapon.HasTagOrProperty("NaturalGear")) {
+                    if (!weapon.HasTagOrProperty(Tag)) {
                         SignalViolation();
                     }
                 }

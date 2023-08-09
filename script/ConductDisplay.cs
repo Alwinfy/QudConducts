@@ -30,7 +30,6 @@ namespace Alwinfy.Conducts {
             if (lastConduct == null) {
                 ret.Append(dead ? "You adhered to no particular conducts.\n" : "You have not adhered to any conducts.\n");
             }
-            UnityEngine.Debug.Log(ret.ToString());
             return ret.ToString();
         }
 
