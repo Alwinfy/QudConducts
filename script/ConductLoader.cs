@@ -131,6 +131,9 @@ namespace Alwinfy.Conducts {
                 if (Reader.Name == "Name") continue;
                 paramSet.Add(Reader.Name, Reader.Value);
             } while (Reader.MoveToNextAttribute());
+            if (blueprint.Reflector is null) {
+                UnityEngine.Debug.Log("Unable to load class: " + ns + '.' + className);
+            }
             blueprint.Parameters = paramSet;
             Reader.MoveToElement();
 			if (Reader.NodeType != XmlNodeType.EndElement && !Reader.IsEmptyElement)

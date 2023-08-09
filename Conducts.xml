@@ -3,10 +3,10 @@
   <!-- skip over artifactless for now, as NoUse is broken until the AfterInventoryUseEvent issue gets patched -->
   <!--
   <conduct Name="Artifactless" AppliesToFollowers="true" Description="You have never used an artifact.">
-    <injunction Name="NoUse" Tag="Artifact" />
+    <injunction Name="NoInteract" Tag="Artifact" />
   </conduct>
   <conduct Name="Mechanimist" HideIf="Artifactless" Description="You have never used a complex artifact.">
-    <injunction Name="NoUse" Tag="ComplexArtifact" />
+    <injunction Name="NoInteract" Tag="ComplexArtifact" />
   </conduct>
   -->
   <conduct Name="Pariah" Group="Social" Description="You {#have |#}never performed the water ritual.">
@@ -19,11 +19,42 @@
     <injunction Name="EventFired" Event="GetCompanionLimit" />
   </conduct>
 
+  <!-- needs AfterInventoryActionEvent -->
+  <!--
+  <conduct Name="Illiterate" Group="Literacy" Description="You {#have been|were#} illiterate.">
+    <injunction Name="NoInventoryUse" Action="Read,LearnFromDataDisk" />
+  </conduct>
+  -->
+  <conduct Name="Unexamined" Group="Literacy" Description="You {#have #}never examined any artifacts.">
+    <injunction Name="NoUseEnergy" Type="Examine" />
+  </conduct>
+
   <conduct Name="Tethered" Group="Body" Description="You {#have #}stayed in your own body.">
     <injunction Name="Tethered" />
   </conduct>
-  <conduct Name="Cloneless" Group="Body" Description="You {#have never been|were never#} cloned.">
+  <conduct Name="Cloneless" Group="Body" Description="You {#have not been|were never#} cloned.">
     <injunction Name="EventFired" Event="AfterBeingCloned" />
+  </conduct>
+
+  <conduct Name="NeverBeenMutant" Description="*nodisplay">
+    <injunction Name="NoBodyPart" Part="Mutations" />
+  </conduct>
+  <conduct Name="NeverBeenTK" Description="*nodisplay">
+    <injunction Name="NotTrueKin" />
+  </conduct>
+  <conduct Name="NoMutations" Group="Body" HideIf="NeverBeenMutant" Description="You {#have been|were#} mutationless.">
+    <injunction Name="NoBodyPart" Part="BaseMutation" />
+    <injunction Name="EventFired" Event="MutationAdded" />
+  </conduct>
+  <conduct Name="NoImplants" Group="Body" HideIf="NeverBeenTK" Description="You {#have been|were#} implantless.">
+    <injunction Name="NoBodyPart" Part="CyberneticsBasePart" />
+    <injunction Name="EventFired" Event="Implant" />
+  </conduct>
+  <conduct Name="NoMutationBuy" Group="Body" HideIf="NeverBeenMutant,NoMutations" Description="You {#have #} never gained a new mutation.">
+    <injunction Name="EventFired" Event="MutationAdded" />
+  </conduct>
+  <conduct Name="NoImplantation" Group="Body" HideIf="NeverBeenTK,NoImplants" Description="You {#have #} never gained a new implant.">
+    <injunction Name="EventFired" Event="Implant" />
   </conduct>
 
   <conduct Name="Fasting" Group="Comestibles" Description="You {#are fasting|fasted during your journey#}.">

@@ -1,8 +1,6 @@
 Food: Vegan, Vegetarian, Carnivore, Kosher/Halal(difficult)
 Polygel, cloning draught
 No tools
-Illiterate: data disks, examinations, books
-Implant-less, mutation-less (physical and mental)
 No skill buy
 Chefless - no ingredients or recipes
 Nudist

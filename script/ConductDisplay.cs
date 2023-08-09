@@ -17,12 +17,18 @@ namespace Alwinfy.Conducts {
             var ret = new StringBuilder();
             Conduct lastConduct = null;
             foreach (var conduct in desirables) {
+                if (conduct.Description == "*nodisplay") {
+                    continue;
+                }
                 if (lastConduct != null && lastConduct.Group != null && lastConduct.Group != conduct.Group) {
                     ret.Append('\n');
                 }
                 FormatConductTo(ref ret, conduct.Description ?? ("You follow{#|ed#} [" + conduct.Name + "] conduct."), dead);
                 ret.Append('\n');
                 lastConduct = conduct;
+            }
+            if (lastConduct == null) {
+                ret.Append(dead ? "You adhered to no particular conducts.\n" : "You have not adhered to any conducts.\n");
             }
             UnityEngine.Debug.Log(ret.ToString());
             return ret.ToString();
