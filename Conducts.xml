@@ -67,8 +67,15 @@
   <conduct Name="Tonicless" Group="Comestibles" Description="You {#have #} never applied a tonic.">
     <injunction Name="EventFired" Event="ApplyingTonic" />
   </conduct>
+  <!-- TODO: Broken right now, will be till we get more robust drink events -->
+  <!--
+  <conduct Name="Waterless" Group="Comestibles" Description="You {#have not drunk|never drank#} any water.">
+    <injunction Name="NoBodyPart" Part="Amphibious" />
+    <injunction Name="EventFired" Event="DrinkingFrom" />
+  </conduct>
+  -->
 
-  <conduct Name="Digless" Group="Movement" Description="You {#have #}never broke walls.">
+  <conduct Name="Digless" Group="Movement" Description="You {#have not broken|never broke#} any walls.">
     <injunction Name="NoKill" Tag="Wall" />
   </conduct>
   <conduct Name="Teleportless" Group="Movement" Description="You {#have #}never teleported.">
