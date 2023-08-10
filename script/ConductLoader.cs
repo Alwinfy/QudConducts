@@ -10,7 +10,6 @@ namespace Alwinfy.Conducts {
 
     [Serializable]
     [HasModSensitiveStaticCache]
-    [HasGameBasedStaticCache]
     public class ConductLoader
     {
         [ModSensitiveStaticCache]
@@ -26,15 +25,10 @@ namespace Alwinfy.Conducts {
             }
         }
 
-        [GameBasedStaticCache]
-        public static ConductSystem _system = null;
         public static ConductSystem System {
             get {
                 CheckInit();
-                if (_system is null) {
-                    _system = The.Game.RequireSystem(() => new ConductSystem());
-                }
-                return _system;
+                return The.Game.RequireSystem(() => new ConductSystem());
             }
         }
 
