@@ -1,9 +1,8 @@
-Food: Vegan, Vegetarian, Carnivore, Kosher/Halal(difficult)
+* Food: Vegan, Vegetarian, Carnivore, Kosher/Halal(difficult)
 Polygel, cloning draught
 No tools
-No skill buy
-Chefless - no ingredients or recipes
-Nudist
-Mechanimist - no chrome!
+* Chefless - no ingredients or recipes
+* Nudist
+* Mechanimist - no chrome!
 
 Jokes (nethack carryover): polymorphs, wishes(nanocrayons), genocides, prayer

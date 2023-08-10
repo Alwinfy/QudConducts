@@ -18,6 +18,21 @@
   <conduct Name="Charmless" Group="Social" Description="You {#have #}never charmed someone else.">
     <injunction Name="EventFired" Event="GetCompanionLimit" />
   </conduct>
+  <!-- waiting on an event for trade success -->
+  <!--
+  <conduct Name="Tradeless" Group="Social" Description="You {#have #}never participated in trade.">
+    <injunction Name="EventFired" Event="alwinfy_TradeComplete" />
+  </conduct>
+  <conduct Name="TradeNoWater" Group="Social" HideIf="Tradeless" Description="You {#have #}never exchanged water for goods.">
+    <injunction Name="NoSpending" Value="NEZ" />
+  </conduct>
+  <conduct Name="TradeNoBuy" Group="Social" HideIf="Tradeless,TradeNoWater" Description="You {#have #}never ponied up water for goods.">
+    <injunction Name="NoSpending" Value="GTZ" />
+  </conduct>
+  <conduct Name="TradeNoSell" Group="Social" HideIf="Tradeless,TradeNoWater" Description="You {#have #}never sold goods for water.">
+    <injunction Name="NoSpending" Value="LTZ" />
+  </conduct>
+  -->
 
   <!-- needs AfterInventoryActionEvent -->
   <!--
@@ -42,19 +57,25 @@
   <conduct Name="NeverBeenTK" Description="*nodisplay">
     <injunction Name="NotTrueKin" />
   </conduct>
-  <conduct Name="NoMutations" Group="Body" HideIf="NeverBeenMutant" Description="You {#have been|were#} mutationless.">
+  <conduct Name="NoMutations" Group="Skill" HideIf="NeverBeenMutant" Description="You {#have been|were#} mutationless.">
     <injunction Name="NoBodyPart" Part="BaseMutation" />
     <injunction Name="EventFired" Event="MutationAdded" />
   </conduct>
-  <conduct Name="NoImplants" Group="Body" HideIf="NeverBeenTK" Description="You {#have been|were#} implantless.">
+  <conduct Name="NoImplants" Group="Skill" HideIf="NeverBeenTK" Description="You {#have been|were#} implantless.">
     <injunction Name="NoBodyPart" Part="CyberneticsBasePart" />
     <injunction Name="EventFired" Event="Implant" />
   </conduct>
-  <conduct Name="NoMutationBuy" Group="Body" HideIf="NeverBeenMutant,NoMutations" Description="You {#have #} never gained a new mutation.">
+  <conduct Name="NoMutationBuy" Group="Skill" HideIf="NeverBeenMutant,NoMutations" Description="You {#have #} never gained a new mutation.">
     <injunction Name="EventFired" Event="MutationAdded" />
   </conduct>
-  <conduct Name="NoImplantation" Group="Body" HideIf="NeverBeenTK,NoImplants" Description="You {#have #} never gained a new implant.">
+  <conduct Name="NoImplantation" Group="Skill" HideIf="NeverBeenTK,NoImplants" Description="You {#have #} never gained a new implant.">
     <injunction Name="EventFired" Event="Implant" />
+  </conduct>
+  <conduct Name="NoSkills" Group="Skill" Description="You {#know|knew#} no skills.">
+    <injunction Name="NoBodyPart" Part="BaseSkill" />
+  </conduct>
+  <conduct Name="NoSkillBuy" Group="Skill" HideIf="NoSkills" Description="You {#have #} never learned a new skill.">
+    <injunction Name="EventFired" Event="AfterAddSkillEvent" />
   </conduct>
 
   <conduct Name="Fasting" Group="Comestibles" Description="You {#are fasting|fasted during your journey#}.">
