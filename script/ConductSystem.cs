@@ -13,7 +13,7 @@ namespace Alwinfy.Conducts {
     [Serializable]
     public class ConductSystem : IGameSystem
     {
-        public HashSet<string> BrokenConducts = new HashSet<string>();
+        public List<string> BrokenConducts = new List<string>();
 
         [NonSerialized]
         public Dictionary<string, Conduct> ConductsByName;
@@ -48,8 +48,9 @@ namespace Alwinfy.Conducts {
             ConductsByName = new Dictionary<string, Conduct>();
             var minEvents = new HashSet<int>();
             InterestingStringEvents = new HashSet<string>();
+            var filter = new HashSet<string>(BrokenConducts);
             foreach (var conduct in ConductLoader.Conducts) {
-                if (BrokenConducts.Contains(conduct.Name)) {
+                if (filter.Contains(conduct.Name)) {
                     continue;
                 }
                 ConductsByName.Add(conduct.Name, conduct);
@@ -114,7 +115,9 @@ namespace Alwinfy.Conducts {
         }
 
         public void SignalViolation(Conduct conduct) {
-            BrokenConducts.Add(conduct.Name);
+            if (!BrokenConducts.Contains(conduct.Name)) {
+                BrokenConducts.Add(conduct.Name);
+            }
             MarkDirty();
         }
     }
