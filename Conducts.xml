@@ -58,11 +58,11 @@
     <injunction Name="NotTrueKin" />
   </conduct>
   <conduct Name="NoMutations" Group="Skill" HideIf="NeverBeenMutant" Description="You {#have been|were#} mutationless.">
-    <injunction Name="NoBodyPart" Part="BaseMutation" />
+    <injunction Name="NoBodyPartSubclassing" Part="Mutation.BaseMutation" />
     <injunction Name="EventFired" Event="MutationAdded" />
   </conduct>
   <conduct Name="NoImplants" Group="Skill" HideIf="NeverBeenTK" Description="You {#have been|were#} implantless.">
-    <injunction Name="NoBodyPart" Part="CyberneticsBasePart" />
+    <injunction Name="NoBodyPartSubclassing" Part="CyberneticsBaseItem" />
     <injunction Name="EventFired" Event="Implant" />
   </conduct>
   <conduct Name="NoMutationBuy" Group="Skill" HideIf="NeverBeenMutant,NoMutations" Description="You {#have #} never gained a new mutation.">
@@ -72,7 +72,7 @@
     <injunction Name="EventFired" Event="Implant" />
   </conduct>
   <conduct Name="NoSkills" Group="Skill" Description="You {#know|knew#} no skills.">
-    <injunction Name="NoBodyPart" Part="BaseSkill" />
+    <injunction Name="NoBodyPartSubclassing" Part="Skill.BaseSkill" />
   </conduct>
   <conduct Name="NoSkillBuy" Group="Skill" HideIf="NoSkills" Description="You {#have #} never learned a new skill.">
     <injunction Name="EventFired" Event="AfterAddSkillEvent" />
