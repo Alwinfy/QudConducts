@@ -12,4 +12,18 @@
     <tag Name="NotHunter" Value="*delete" />
     <tag Name="NotTemplar" Value="*delete" />
   </object>
+
+  <object Name="Food" Load="Merge">
+    <part Name="alwinfy_FoodListener" />
+  </object>
+  <object Name="WaterContainer" Load="Merge">
+    <part Name="alwinfy_FoodListener" />
+  </object>
+
+  <object Name="Lignin" Load="Merge">
+    <tag Name="PhotosynthiteFood" />
+  </object>
+  <object Name="Starch" Load="Merge">
+    <tag Name="PhotosynthiteFood" />
+  </object>
 </objects>

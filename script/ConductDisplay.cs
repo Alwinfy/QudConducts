@@ -57,6 +57,7 @@ namespace Alwinfy.Conducts {
             }
             buffer.Append(fmt.Substring(startIx));
         }
+
         public static List<Conduct> FilterHiddenConducts(Dictionary<string, Conduct> conducts) {
             var ret = new List<Conduct>();
             foreach (var conduct in conducts.Values) {

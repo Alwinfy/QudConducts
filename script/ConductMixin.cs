@@ -10,6 +10,16 @@ using XRL.Core;
 
 namespace Alwinfy.Conducts {
 
+    [HarmonyPatch(typeof(GameObject))]
+    [HarmonyPatch(nameof(GameObject.AwardXPTo))]
+    public class GameObject_AwardXPTo_Patch {
+        public static void Prefix(GameObject __instance, GameObject who, bool ForKill, bool MockAward) {
+            if (ForKill && !MockAward) {
+                who.FireEvent(new Event("MurderEvent", "Victim", __instance));
+            }
+        }
+    }
+
     public class MixinHelper {
         public static int GetStoreIndex(CodeInstruction insn) {
             if (insn.opcode == OpCodes.Stloc_0) return 0;

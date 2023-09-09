@@ -1,37 +1,43 @@
 using System.Collections.Generic;
 using System;
 using XRL.World;
-using XRL;
 
 namespace Alwinfy.Conducts.Injunctions {
 
-    // Currently broken (2023-08-08) until next Friday.
     [Serializable]
     public class NoInteract : Injunction
     {
-        public string Tag;
+        public string Tag = null;
+        public string Part = null;
 
         public string ValidCommands = "";
+
+        public static string DefaultValidCommands = "Remove,Remove Notes,Add Notes,AutoCollect,Clean,CleanAll,Close,Open,Disarm,Disassemble,Disassemble All,Get,Look,Examine,Mark Important,Mark Unimportant,Pet,Pour,Fill,Read,Repair,RepairVehicle,Rifle,Sacrifice,Stand,Stand Up,Unload Ammo,Load Ammo";
+
+        public bool Invert = false;
 
         [NonSerialized]
         HashSet<string> _ValidCommandsMap = null;
         HashSet<string> ValidCommandsMap {
             get {
                 if (_ValidCommandsMap == null) {
-                    _ValidCommandsMap = new HashSet<string>(ValidCommands.Split(','));
+                    _ValidCommandsMap = new HashSet<string>((ValidCommands == "*default" ? DefaultValidCommands : ValidCommands).Split(','));
                 }
                 return _ValidCommandsMap;
             }
         }
 
         public override IEnumerable<EventType> DesiredEvents() {
-            yield return new MinEventType(AfterInventoryActionEvent.ID);
+            yield return new MinEventType(OwnerAfterInventoryActionEvent.ID);
+        }
+
+        public bool MatchItem(GameObject go) {
+            return (Tag == null || go.HasTagOrProperty(Tag)) && (Part == null || go.HasPart(Part));
         }
 
         public override void HandleEvent(GameObject target, MinEvent E) {
-            if (E is AfterInventoryActionEvent aiae) {
-                UnityEngine.Debug.Log("[Conducts] Got command: " + aiae.Command);
-                if (aiae.Item.HasTagOrProperty(Tag) && !ValidCommandsMap.Contains(aiae.Command)) {
+            if (E is OwnerAfterInventoryActionEvent aiae) {
+                if (MatchItem(aiae.Item) && ValidCommandsMap.Contains(aiae.Command) == Invert) {
                     SignalViolation();
                 }
             }

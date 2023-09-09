@@ -12,12 +12,12 @@ namespace Alwinfy.Conducts.Injunctions {
         public string ExcludeTag;
 
         public override IEnumerable<EventType> DesiredEvents() {
-            yield return new MinEventType(AwardXPEvent.ID);
+            yield return new StringlyEventType("MurderEvent");
         }
 
-        public override void HandleEvent(GameObject target, MinEvent E) {
-            if (E is AwardXPEvent axe) {
-                if (axe.Kill != null && axe.Kill.HasTagOrProperty(Tag) && (ExcludeTag == null || !axe.Kill.HasTagOrProperty(ExcludeTag))) {
+        public override void FireEvent(GameObject target, Event E) {
+            if (E.ID == "MurderEvent" && E.GetGameObjectParameter("Victim") is GameObject victim) {
+                if (victim.HasTagOrProperty(Tag) && (ExcludeTag == null || !victim.HasTagOrProperty(ExcludeTag))) {
                     SignalViolation();
                 }
             }

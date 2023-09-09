@@ -2,8 +2,8 @@
 <conducts>
   <!-- skip over artifactless for now, as NoUse is broken until the AfterInventoryUseEvent issue gets patched -->
   <!--
-  <conduct Name="Artifactless" AppliesToFollowers="true" Description="You have never used an artifact.">
-    <injunction Name="NoInteract" Tag="Artifact" />
+  <conduct Name="Artifactless" Group="Luddite" AppliesToFollowers="true" Description="You have never used an artifact.">
+    <injunction Name="NoInteract" Part="Examiner" ValidCommands="*default" />
   </conduct>
   <conduct Name="Mechanimist" HideIf="Artifactless" Description="You have never used a complex artifact.">
     <injunction Name="NoInteract" Tag="ComplexArtifact" />
@@ -34,11 +34,11 @@
   </conduct>
   -->
 
-  <!-- needs AfterInventoryActionEvent -->
-  <!--
-  <conduct Name="Illiterate" Group="Literacy" Description="You {#have been|were#} illiterate.">
-    <injunction Name="NoInventoryUse" Action="Read,LearnFromDataDisk" />
+  <conduct Name="Illiterate" Group="Luddite" Description="You {#have been|were#} illiterate.">
+    <injunction Name="NoInteract" ValidCommands="Read,LearnFromDataDisk" Invert="true" />
   </conduct>
+  <!-- OwnerAfterInventoryActionEvent still kinda broken -->
+  <!--
   <conduct Name="Unexamined" Group="Literacy" Description="You {#have #}never examined any artifacts.">
     <injunction Name="NoUseEnergy" Type="Examine" />
   </conduct>
@@ -49,6 +49,8 @@
   </conduct>
   <conduct Name="Cloneless" Group="Body" Description="You {#have not been|were never#} cloned.">
     <injunction Name="EventFired" Event="AfterBeingCloned" />
+    <injunction Name="EventFired" Event="AfterDeepCopyWithEffects" />
+    <injunction Name="EventFired" Event="AfterDeepCopyWithoutEffects" />
   </conduct>
 
   <conduct Name="NeverBeenMutant" Description="*nodisplay">
@@ -75,15 +77,30 @@
     <injunction Name="NoBodyPartSubclassing" Part="Skill.BaseSkill" />
   </conduct>
   <conduct Name="NoSkillBuy" Group="Skill" HideIf="NoSkills" Description="You {#have #} never learned a new skill.">
-    <injunction Name="EventFired" Event="AfterAddSkillEvent" />
+    <injunction Name="EventFired" Event="AfterAddSkill" />
   </conduct>
 
   <conduct Name="Fasting" Group="Comestibles" Description="You {#are fasting|fasted during your journey#}.">
     <injunction Name="EventFired" Event="Eating" />
-    <injunction Name="NoUseCampfire" />
+    <injunction Name="EventFired" Event="CookedAt" />
+  </conduct>
+  <conduct Name="Snackless" Group="Comestibles" HideIf="Fasting" Description="You {#have never eaten|never ate#} uncooked food.">
+    <injunction Name="NoEat" Tag="*anything" RawOnly="true" />
   </conduct>
   <conduct Name="Cookless" Group="Comestibles" HideIf="Fasting" Description="You {#have never eaten|never ate#} a full meal.">
-    <injunction Name="NoUseCampfire" />
+    <injunction Name="EventFired" Event="CookedAt" />
+  </conduct>
+  <conduct Name="OnlyWhipped" Group="Comestibles" HideIf="Cookless" Description="You {#have #}never cooked with your own ingredients.">
+    <injunction Name="NoEat" Tag="*anything" CookedOnly="true" />
+  </conduct>
+  <conduct Name="OnlyLiquid" Group="Comestibles" HideIf="OnlyWhipped" Description="You {#have #}only cooked with liquids.">
+    <injunction Name="NoEat" Tag="WaterContainer" InvertTag="true" CookedOnly="true" />
+  </conduct>
+  <conduct Name="Vegetarian" Group="Comestibles" HideIf="Fasting" Description="You {#have been|were#} vegetarian.">
+    <injunction Name="NoEat" Tag="Meat" />
+  </conduct>
+  <conduct Name="Carnivore" Group="Comestibles" HideIf="Fasting,Vegetarian" Description="You {#have eaten|ate#} only meat.">
+    <injunction Name="NoEat" Tag="Meat" InvertTag="true" />
   </conduct>
   <conduct Name="Tonicless" Group="Comestibles" Description="You {#have #} never applied a tonic.">
     <injunction Name="EventFired" Event="ApplyingTonic" />
