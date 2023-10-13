@@ -157,9 +157,11 @@ namespace Alwinfy.Conducts {
             }
             blueprint.InitializePartInstance(inj);
             inj.ParentConduct = parentConduct;
+            /* removed for 7th plague beta, as finalizeBuild has disappeared
             if (blueprint.finalizeBuild != null) {
                 blueprint.finalizeBuild.Invoke(inj, null);
             }
+            */
             return inj;
         }
     }

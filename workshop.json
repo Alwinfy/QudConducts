@@ -3,6 +3,6 @@
   "Title": "Caves of Conduct",
   "Description": "Enjoying the grind too little? Qud too easy to navigate? Feel bad about kithing someone and then mugging them for all they're worth? Try Caves of Conduct - a fully optional way to spice up your runs!\n\n[h2]What does this add?[/h2]\nThis mod adds a single menu, the Conducts menu. To open it, find \"Open Conducts\" in Keybinds > Status and bind it to (for example) Ctrl-O.\n\nThis menu simply brings up a list of conducts that you can follow, keeping track of which ones you've upheld.\n\n[h2]What are conducts good for?[/h2]\nSimply put - they're for bragging rights; they show up in your death menu/tombstone file, proving that you've managed to do things like \"make it to the Moon Stair without eating a single bite\" or \"kill Saad-Amus without ever firing a gun or swinging a weapon.\" All challenges are optional, but some aren't for the faint of heart...\n\n[h2]Can I add my own Conducts?[/h2]\nOf course! When Caves of Conduct is loaded, any mod with a Conducts.xml file will have their own conducts added to the game. (See the given Conducts.xml for details.) Make a conduct for fighting exclusively with a rubber chicken! Prevent yourself from moving except when propelled by explosives! The possibilities are endless!",
   "Tags": "Hardcore, Optional Difficulty, Challenge, Extensible",
-  "Visibility": "1",
+  "Visibility": "2",
   "ImagePath": "preview.png"
 }
