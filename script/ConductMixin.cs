@@ -13,9 +13,9 @@ namespace Alwinfy.Conducts {
     [HarmonyPatch(typeof(GameObject))]
     [HarmonyPatch(nameof(GameObject.AwardXPTo))]
     public class GameObject_AwardXPTo_Patch {
-        public static void Prefix(GameObject __instance, GameObject who, bool ForKill, bool MockAward) {
+        public static void Prefix(GameObject __instance, GameObject Subject, bool ForKill, String Deed, bool MockAward) {
             if (ForKill && !MockAward) {
-                who.FireEvent(new Event("MurderEvent", "Victim", __instance));
+                Subject.FireEvent(new Event("MurderEvent", "Victim", __instance));
             }
         }
     }

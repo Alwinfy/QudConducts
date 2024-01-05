@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <commands>
-  <command ID="alwinfy_CmdShowConduct" DisplayText="Show Conducts" Category="Status" Layer="Adventure"></command>
+  <command ID="alwinfy_CmdShowConduct" DisplayText="Show Conducts" Category="Status" Layer="Adventure" Auto="Down">
+    <keyboardBind Modifier="ctrl" Key="o" />
+  </command>
 </commands>
